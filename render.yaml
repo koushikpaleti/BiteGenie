@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: bitegenie
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start -- --hostname 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: NEXT_PUBLIC_APP_URL
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: XAI_API_KEY
+        sync: false
+      - key: AI_BASE_URL
+        sync: false
+      - key: OPENAI_MODEL
+        sync: false

@@ -208,6 +208,27 @@ npm run dev
 
 ## Deployment
 
+### Render + MongoDB Atlas Free
+
+This app can be deployed on Render as a Node web service while keeping MongoDB on the Atlas free tier.
+
+1. Create a free MongoDB Atlas cluster (`M0`) and create a database user.
+2. In Atlas, allow access from anywhere for the app by adding `0.0.0.0/0` to the IP access list.
+3. Copy the Atlas SRV connection string and replace the username and password placeholders.
+4. In Render, create a new Blueprint from this repository. The included `render.yaml` creates the `bitegenie` web service.
+5. Set these environment variables in Render when prompted:
+   `MONGODB_URI`
+   `NEXT_PUBLIC_APP_URL`
+   `OPENAI_API_KEY` or `GROQ_API_KEY` or `XAI_API_KEY`
+   `AI_BASE_URL` when using Groq or xAI
+   `OPENAI_MODEL`
+6. After the first deploy finishes, set `NEXT_PUBLIC_APP_URL` to your Render service URL and redeploy once.
+
+Notes:
+
+- Render free web services spin down when idle, so the first request after inactivity can be slow.
+- The Atlas free tier is suitable for demos and small personal projects, not heavy production traffic.
+
 ### Vercel
 
 1. Push the repository to GitHub.
